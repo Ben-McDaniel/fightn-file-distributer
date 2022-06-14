@@ -1,9 +1,7 @@
-#new plan
-#pull whole repo
-#grab stuff thats new
-#move those files to the right spots
-#delete whole pull
-
+#in repo have one 'uploaded' directory
+#all files not in there go to appropriate locations
+#then those dirs are moved to 'uploaded' and program 
+#pushes to git 
 
 import time
 import git
@@ -11,14 +9,21 @@ from git import Repo
 from privateData import pwd
 from github_pusher import toGitHub
 import csv
-#/mcdanibj/Desktop -> /mcdanbj2
-local_path = "/home/mcdanibj/Desktop/fightn-file-distributer-tmp"
-username = "Ben-McDaniel"
-password = pwd.token
-target_repo = f"https://{username}:{password}@github.com/Ben-McDaniel/fightn-file-distributer"
+import subprocess
+import shutil
+import os
+import stat
+from os import path
+
 
 #/mcdanibj/Desktop -> /mcdanbj2
-repo = git.Repo("/home/mcdanibj/Desktop/fightn-file-distributer")
+local_path = "/home/mcdanbj2/dispenser"
+username = "Ben-McDaniel"
+password = pwd.token
+target_repo = f"https://{username}:{password}@github.com/Ben-McDaniel/dispenser"
+
+#/mcdanibj/Desktop -> /mcdanbj2
+repo = git.Repo("/home/mcdanbj2/dispenser")
 
 def main():
     #Repo.clone_from(target_repo, local_path)
@@ -38,11 +43,13 @@ def main():
         #True when new files written to github
         if compare(recent_Commit):
             time_since_last_commit = 0
-            commit_to_pull = target_repo + '/tree/' + str(commits[0])
-            print(commit_to_pull)
-            Repo.clone_from(commit_to_pull, local_path)
-            
-        #print(target_repo.git.log())
+            #Repo.clone_from(target_repo, local_path)
+
+            #delete repo -> Working 6/14/22
+            deleteRepo(local_path)
+
+
+
 
 
 #if this is true, you must pull
@@ -68,6 +75,19 @@ def compare(recent_datetime):
         csv_writer = csv.writer(commit_log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow([recent_datetime])
     return True
+
+
+
+#deletes repo, must do this way to allow deleting
+#read-only .git files
+def deleteRepo(local_path):
+    for root, dirs, files in os.walk(local_path):  
+        for dir in dirs:
+            os.chmod(path.join(root, dir), stat.S_IRWXU)
+        for file in files:
+            os.chmod(path.join(root, file), stat.S_IRWXU)
+    shutil.rmtree(local_path)
+
 
 if __name__ == "__main__":
     main()
