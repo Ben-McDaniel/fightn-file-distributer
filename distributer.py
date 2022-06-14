@@ -23,7 +23,8 @@ password = pwd.token
 target_repo = f"https://{username}:{password}@github.com/Ben-McDaniel/dispenser"
 
 #/mcdanibj/Desktop -> /mcdanbj2
-repo = git.Repo("/home/mcdanbj2/dispenser")
+localrepo = git.Repo("/home/mcdanbj2/dispenser")
+repoRemote = git.remote.Remote(localrepo, "dispenser")
 
 def main():
     #Repo.clone_from(target_repo, local_path)
@@ -31,22 +32,21 @@ def main():
     time_since_last_commit = 0
 
     while True:
-        time.sleep(10)
+        time.sleep(1)
         polling_count += 1
         time_since_last_commit +=1
         
         print('[',time_since_last_commit, '||' ,polling_count,']Now Checking for new Commits...')
-        commits = list(repo.iter_commits())
+        commits = list(localrepo.iter_commits())
         recent_Commit=commits[0].committed_datetime
 
 
         #True when new files written to github
         if compare(recent_Commit):
             time_since_last_commit = 0
-            #Repo.clone_from(target_repo, local_path)
-
-            #delete repo -> Working 6/14/22
-            deleteRepo(local_path)
+            #Repo.git.pull_request(target_repo, local_path)
+            repoRemote.pull()
+            x = input()
 
 
 
@@ -69,12 +69,12 @@ def compare(recent_datetime):
             with open('commitLog.csv', mode='a') as commit_log:
                 csv_writer = csv.writer(commit_log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 csv_writer.writerow([recent_datetime])
-            return False
+            return True
 
     with open('commitLog.csv', mode='a') as commit_log:
         csv_writer = csv.writer(commit_log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow([recent_datetime])
-    return True
+    return False
 
 
 
