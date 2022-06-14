@@ -1,2 +1,3 @@
 #exclude private data... duh!
 /privateData.py
+__pycache__/
