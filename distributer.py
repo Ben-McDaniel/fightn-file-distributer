@@ -112,6 +112,8 @@ def notify_email():
     #import multiple email addresses
     to = studentInfo.emails
     msg['To'] = ",".join(to)
+
+    
     s.sendmail(me, to, msg.as_string())
 
 #<--------------DEPRICATED-------------->
