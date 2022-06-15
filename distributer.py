@@ -1,3 +1,4 @@
+import email
 import time
 import git
 from privateData import pwd
@@ -7,6 +8,11 @@ import os
 import stat
 from os import path
 
+#email specific imports
+import smtplib
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from privateData import studentInfo
 
 
 #Used for commit checking
@@ -51,14 +57,15 @@ def main():
             repoRemote.pull()
             print("Pulled")
 
-            #clone and push files to appropriate new places
+            #clone and push files to appropriate new places (done in pusher file)
 
-            #move files into 'uploaded' dir in dispenser
+            #move files into 'uploaded' dir in dispenser (done in pusher file)
 
-            #commit and push changes
+            #commit and push changes of 'remoteRepo'
 
-            #send email to mailing list letting everyone know 
+            #send email to mailing list letting everyone know
             #what files were uploaded and to where
+            notify_email()
 
 
         #Pull every (x) seconds
@@ -97,6 +104,15 @@ def compare(recent_datetime):
     return True
 
 
+
+def notify_email():
+    msg = MIMEMultipart()
+    msg['Subject'] = 'New Files Processed'
+
+    #import multiple email addresses
+    to = studentInfo.emails
+    msg['To'] = ",".join(to)
+    s.sendmail(me, to, msg.as_string())
 
 #<--------------DEPRICATED-------------->
 #deletes repo, must do this way to allow deleting
