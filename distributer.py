@@ -14,6 +14,7 @@ import shutil
 import os
 import stat
 from os import path
+from getpass import getpass
 
 
 #/mcdanibj/Desktop -> /mcdanbj2
@@ -24,7 +25,7 @@ target_repo = f"https://{username}:{password}@github.com/Ben-McDaniel/dispenser"
 
 #/mcdanibj/Desktop -> /mcdanbj2
 localrepo = git.Repo("/home/mcdanbj2/dispenser")
-repoRemote = git.remote.Remote(localrepo, "dispenser")
+repoRemote = git.remote.Remote(localrepo, "origin")
 
 def main():
     #Repo.clone_from(target_repo, local_path)
@@ -42,10 +43,19 @@ def main():
 
 
         #True when new files written to github
-        if compare(recent_Commit):
+        #if compare(recent_Commit):
+        if True:
             time_since_last_commit = 0
             #Repo.git.pull_request(target_repo, local_path)
-            repoRemote.pull()
+            #repoRemote.pull()
+            #deleteRepo(local_path)
+
+            #os.environ['GIT_ASKPASS'] = os.path.join(target_repo, 'askpass.py')
+            #os.environ['GIT_USERNAME'] = username
+            #os.environ['GIT_PASSWORD'] = password
+            g = git.cmd.Git(target_repo)
+            g.pull()
+            print("Pulled")
             x = input()
 
 
@@ -69,12 +79,12 @@ def compare(recent_datetime):
             with open('commitLog.csv', mode='a') as commit_log:
                 csv_writer = csv.writer(commit_log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 csv_writer.writerow([recent_datetime])
-            return True
+            return False
 
     with open('commitLog.csv', mode='a') as commit_log:
         csv_writer = csv.writer(commit_log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow([recent_datetime])
-    return False
+    return True
 
 
 
