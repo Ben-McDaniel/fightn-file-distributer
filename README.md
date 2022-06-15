@@ -30,4 +30,4 @@ if they have clone the RM Uploads repo\
 parse directories for specific names \
 ->"website"\
 ->"grabcad"\
-->"email"\
+->"email"
