@@ -9,10 +9,7 @@ Depedencies/Setup\
 -Add privateData.py file to local clone of fightn-file-distributer\
 \
 \
-
-
-
-
+\
 final structure\
 \
 ->Pi running fightn-file-distributer(code for this stored in its own repo)\
