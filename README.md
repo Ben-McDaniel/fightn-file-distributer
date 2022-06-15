@@ -1,10 +1,17 @@
 # fightn-file-distributer
 A file distribution menace 
 
-Depedencies 
+Depedencies/Setup
 -GitPython
-
 -Store credentials (https://git-scm.com/docs/git-credential-store) to allow auto pulling
+-Fix all paths defined in distributer.py
+-pull 'dispenser' repo
+-Add privateData.py file to local clone of fightn-file-distributer
+
+
+
+
+
 
 final structure
 
