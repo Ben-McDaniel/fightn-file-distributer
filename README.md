@@ -4,6 +4,8 @@ A file distribution menace
 Depedencies 
 -GitPython
 
+-Store credentials (https://git-scm.com/docs/git-credential-store) to allow auto pulling
+
 final structure
 
 ->Pi running fightn-file-distributer(code for this stored in its own repo)
