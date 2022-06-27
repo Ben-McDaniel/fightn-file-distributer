@@ -1,33 +1,6 @@
-# fightn-file-distributer
-A file distribution menace 
 
-Depedencies/Setup\
--GitPython\
--Store credentials (https://git-scm.com/docs/git-credential-store) to allow auto pulling\
--Fix all paths defined in distributer.py\
--pull 'dispenser' repo\
--Add privateData.py file to local clone of fightn-file-distributer\
-\
-\
-\
-final structure\
-\
-->Pi running fightn-file-distributer(code for this stored in its own repo)\
-\
-->RHIT RM uploads github repo\
-\
-->Individual places to put files, ie. website github, grabcad, email to rm mailing list\
-\
-\
-Process - User side\
-Upload files to github within folders with their specified location\
-in a max of 10 min they are uploaded to the correct places\
-*possibly* recieve an email confirming their upload\
-\
-Process - Script Side\
-Every 10 min check to see if new files have been uploaded \
-if they have clone the RM Uploads repo\
-parse directories for specific names \
-->"website"\
-->"grabcad"\
-->"email"
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/Ben-McDaniel)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ben-mcdaniel-b00924215?trk=people-guest_people_search-card&original_referer=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%3FfirstName%3DBen%26lastName%3DMcDaniel%26trk%3Dpeople-guest_people-search-bar_search-submit)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/sn1ck3t)
+
